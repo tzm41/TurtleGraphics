@@ -17,5 +17,10 @@ public class TestTurtleTokenizer {
         while (tokenizer3.hasMoreTokens()) {
             System.out.print(tokenizer3.nextToken() + "\n");
         }
+
+        TurtleTokenizer tokenizer4 = new TurtleTokenizer("X36 {X4 {F120 L90} L10} ");
+        while (tokenizer4.hasMoreTokens()) {
+            System.out.print(tokenizer4.nextToken() + "\n");
+        }
     }
 }
