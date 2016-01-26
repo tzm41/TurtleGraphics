@@ -7,68 +7,86 @@
 /**
  * This class divides up a command string into individual tokens.
  * A token consists of one of two forms:
- *
+ * <p/>
  * (1) A letter, optionally followed by any number of decimal digits,
- *     as in "F20", "R120", or "D", or
+ * as in "F20", "R120", or "D", or
  * (2) A string beginning with "{" and continuing up to the matching "}".
- *
+ * <p/>
  * The tokenizer ignores all whitespace characters separating tokens.
  */
 
 public class TurtleTokenizer {
 
-	private String str;
+    private String str;
 
-/**
- * Creates a new TurtleTokenizer that takes its input from the string str.
- * @param str The string to be scanned
- */
-	public TurtleTokenizer(String str) {
+    /**
+     * Creates a new TurtleTokenizer that takes its input from the string str.
+     *
+     * @param str The string to be scanned
+     */
+    public TurtleTokenizer(String str) {
         this.str = str;
-	}
+    }
 
-/**
- * Returns true if there are more tokens to read and false if the tokenizer
- * has reached the end of the input.
- * @return A boolean value indicating whether there are any unread tokens
- */
-	public boolean hasMoreTokens() {
-		return false;
-	}
+    /**
+     * Returns true if there are more tokens to read and false if the tokenizer
+     * has reached the end of the input.
+     *
+     * @return A boolean value indicating whether there are any unread tokens
+     */
+    public boolean hasMoreTokens() {
+        return str.length() > 0;
+    }
 
-/**
- * Returns the next complete token. If this method is called at the end
- * of the input, the tokenizer returns the empty string.
- * @return The next token in the input
- */
-	public String nextToken() {
+    /**
+     * Returns the next complete token. If this method is called at the end
+     * of the input, the tokenizer returns the empty string.
+     *
+     * @return The next token in the input
+     */
+    public String nextToken() {
         char charAtI = str.charAt(0);
         str = str.substring(1);
         String[] numbers = str.split("[A-Z]|\\{|\\}");
         switch (charAtI) {
             case 'F':
                 if (Character.isDigit(str.charAt(0))) {
+                    str = str.substring(numbers[0].length() - 1);
                     return charAtI + numbers[0];
                 } else {
                     return charAtI + "50";
                 }
-            case 'L': case 'R':
+            case 'L':
+            case 'R':
                 if (Character.isDigit(str.charAt(0))) {
+                    str = str.substring(numbers[0].length() - 1);
                     return charAtI + numbers[0];
                 } else {
                     return charAtI + "90";
                 }
-            case 'U': case 'D':
+            case 'U':
+            case 'D':
                 return String.valueOf(charAtI);
             case 'X':
                 if (Character.isDigit(str.charAt(0))) {
+                    str = str.substring(numbers[0].length() - 1);
                     return charAtI + numbers[0];
                 }
             case '{':
-
+                int counter = 1;
+                int endIndex = 0;
+                for (int i = 0; i < str.length(); i++) {
+                    if (str.charAt(i) == '{') counter++;
+                    if (str.charAt(i) == '}') counter--;
+                    if (counter == 0) {
+                        endIndex = i + 1;
+                        break;
+                    }
+                }
+                return charAtI + str.substring(0, endIndex);
         }
-		return "";
-	}
+        return "";
+    }
 
 // Add private methods and instance variables here
 
