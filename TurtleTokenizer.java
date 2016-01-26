@@ -49,27 +49,29 @@ public class TurtleTokenizer {
         str = str.substring(1);
         String[] numbers = str.split("[A-Z]|\\{|\\}");
         switch (charAtI) {
+            case ' ':
+                return nextToken();
             case 'F':
-                if (Character.isDigit(str.charAt(0))) {
-                    str = str.substring(numbers[0].length() - 1);
+                if (str.length() > 0 && Character.isDigit(str.charAt(0))) {
+                    str = str.substring(numbers[0].length());
                     return charAtI + numbers[0];
                 } else {
-                    return charAtI + "50";
+                    return charAtI + "";
                 }
             case 'L':
             case 'R':
-                if (Character.isDigit(str.charAt(0))) {
-                    str = str.substring(numbers[0].length() - 1);
+                if (str.length() > 0 && Character.isDigit(str.charAt(0))) {
+                    str = str.substring(numbers[0].length());
                     return charAtI + numbers[0];
                 } else {
-                    return charAtI + "90";
+                    return charAtI + "";
                 }
             case 'U':
             case 'D':
-                return String.valueOf(charAtI);
+                return charAtI + "";
             case 'X':
-                if (Character.isDigit(str.charAt(0))) {
-                    str = str.substring(numbers[0].length() - 1);
+                if (str.length() > 0 && Character.isDigit(str.charAt(0))) {
+                    str = str.substring(numbers[0].length());
                     return charAtI + numbers[0];
                 }
             case '{':
@@ -83,7 +85,9 @@ public class TurtleTokenizer {
                         break;
                     }
                 }
-                return charAtI + str.substring(0, endIndex);
+                String newString = charAtI + str.substring(0, endIndex);
+                str = str.substring(endIndex);
+                return newString;
         }
         return "";
     }
