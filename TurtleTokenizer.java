@@ -17,12 +17,14 @@
 
 public class TurtleTokenizer {
 
+	private String str;
+
 /**
  * Creates a new TurtleTokenizer that takes its input from the string str.
  * @param str The string to be scanned
  */
 	public TurtleTokenizer(String str) {
-		// Fill this in
+        this.str = str;
 	}
 
 /**
@@ -31,16 +33,41 @@ public class TurtleTokenizer {
  * @return A boolean value indicating whether there are any unread tokens
  */
 	public boolean hasMoreTokens() {
-		return false; // Replace this line with the correct implementation
+		return false;
 	}
 
 /**
- * Returns the next complete token.  If this method is called at the end
+ * Returns the next complete token. If this method is called at the end
  * of the input, the tokenizer returns the empty string.
  * @return The next token in the input
  */
 	public String nextToken() {
-		return ""; // Replace this line with the correct implementation
+        char charAtI = str.charAt(0);
+        str = str.substring(1);
+        String[] numbers = str.split("[A-Z]|\\{|\\}");
+        switch (charAtI) {
+            case 'F':
+                if (Character.isDigit(str.charAt(0))) {
+                    return charAtI + numbers[0];
+                } else {
+                    return charAtI + "50";
+                }
+            case 'L': case 'R':
+                if (Character.isDigit(str.charAt(0))) {
+                    return charAtI + numbers[0];
+                } else {
+                    return charAtI + "90";
+                }
+            case 'U': case 'D':
+                return String.valueOf(charAtI);
+            case 'X':
+                if (Character.isDigit(str.charAt(0))) {
+                    return charAtI + numbers[0];
+                }
+            case '{':
+
+        }
+		return "";
 	}
 
 // Add private methods and instance variables here

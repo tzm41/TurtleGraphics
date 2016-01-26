@@ -11,7 +11,6 @@
 import acm.program.*;
 
 public class TurtleGraphics extends GraphicsProgram {
-
 	/* Constants to set the application size */
 	public static final int APPLICATION_WIDTH = 1000;
 	public static final int APPLICATION_HEIGHT = 600;
