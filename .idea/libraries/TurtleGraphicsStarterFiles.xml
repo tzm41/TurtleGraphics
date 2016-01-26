@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="TurtleGraphicsStarterFiles">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/turtle.jar!/" />
+      <root url="jar://$PROJECT_DIR$/acm.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
