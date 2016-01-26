@@ -45,34 +45,30 @@ public class TurtleTokenizer {
      * @return The next token in the input
      */
     public String nextToken() {
-        char charAtI = str.charAt(0);
+        char charAtI;
+        try {
+            charAtI = str.charAt(0);
+        } catch (StringIndexOutOfBoundsException e) {
+            return "";
+        }
+
         str = str.substring(1);
         String[] numbers = str.split("[A-Z]|\\{|\\}");
+
         switch (charAtI) {
             case ' ':
                 return nextToken();
             case 'F':
-                if (str.length() > 0 && Character.isDigit(str.charAt(0))) {
-                    str = str.substring(numbers[0].length());
-                    return charAtI + numbers[0];
-                } else {
-                    return charAtI + "";
-                }
             case 'L':
             case 'R':
-                if (str.length() > 0 && Character.isDigit(str.charAt(0))) {
-                    str = str.substring(numbers[0].length());
-                    return charAtI + numbers[0];
-                } else {
-                    return charAtI + "";
-                }
             case 'U':
             case 'D':
-                return charAtI + "";
             case 'X':
                 if (str.length() > 0 && Character.isDigit(str.charAt(0))) {
                     str = str.substring(numbers[0].length());
                     return charAtI + numbers[0];
+                } else {
+                    return charAtI + "";
                 }
             case '{':
                 int counter = 1;
@@ -91,7 +87,4 @@ public class TurtleTokenizer {
         }
         return "";
     }
-
-// Add private methods and instance variables here
-
 }
