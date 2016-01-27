@@ -121,120 +121,61 @@ Problem \hmwkAssignmentNum.\hmwkProblemNum}
 %%% A list of your collaborators' NetIDs, separated by ", ".
 %%% You can use a new line ("\\") in the middle to prevent a long
 %%% list from overflowing.
-\newcommand{\hmwkCollaborators}{Rafeal Zuniga}
+\newcommand{\hmwkCollaborators}{Rafael Zuniga}
 %%% Sets the collaborator list to appear on the first page
 \thispagestyle{fancycollab}
 
-%%%%%%% begin Solution %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%% begin Problem %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Turtle Graphics}
-In millions of newspapers across the United States there is a word game called \textit{Jumble}. The object of this game is to solve a riddle, but in order to find the letters that appear in the answer it is necessary to unscramble four words. Your task is to write a program that can unscramble words.
 
-\bigskip
+\subsection{How to compile and run}
 
-\noindent\textbf{Input}
 
-The input file contains four parts:
-\begin{enumerate}
-  \item a dictionary, which consists of at least one and at most 100 words, one per line;
-  \item a line containing \texttt{XXXXXX}, which signals the end of the dictionary;
-  \item one or more scrambled `words' that you must unscramble, each on a line by itself; and
-  \item another line containing \texttt{XXXXXX}, which signals the end of the file.
-\end{enumerate}
-All words, including both dictionary words and scrambled words, consist only of lowercase English letters and will be at least one and at most six characters long. (Note that the sentinel \texttt{XXXXXX} contains uppercase \texttt{X}'s.) The dictionary is not necessarily in sorted order, but each word in the dictionary is unique.
+\subsection{Description of algorithms and data structure}
+\paragraph{TurtleTokenizer:} description..
+\paragraph{TurtleGraphics:} description..
 
-\bigskip
+\subsection{Analysis}
+\paragraph{TurtleTokenizer:} Analysis..
+\paragraph{TurtleGraphics:} Analysis..
 
-\noindent\textbf{Output}
+\subsection{How to use test files}
 
-For each scrambled word in the input, output an alphabetical list of all dictionary words that can be formed by rearranging the letters in the scrambled word. Each word in this list must appear on a line by itself. If the list is empty (because no dictionary words can be formed), output the line ``\texttt{NOT A VALID WORD}'' instead. In either case, output a line containing six asterisks to signal the end of the list.
-
-%%%%%%% end Problem %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Description of test cases}
 
 \newpage
+\section{Anagrams}
 
-\section{Formulation}
-Upon consideration, there will be two arrays at scanning phase, storing the dictonary and the scrambled words. We could sort each of the strings in alphabetical order, store them in two other arrays, and compare the sorted versions.
+\subsection{How to compile and run}
+Compilation: 
+\texttt{javac Anagrams.java}
 
-The sorting time of each word is relatively small, on average $l\log l$ time, where the length of each word $l\leq6$ could be treated as constant. So the total time is $m+n$, the sum of the two lists. The comparing time of the whole list is then $m\times n$, where each of the provided words in the list of length $m$, has to be compared to the words in the dictionary of length $n$.
+execution:
+\texttt{java\ Anagrams\ input.txt}
 
-\section{Solution}
+\subsection{Description of algorithms and data structure}
+\paragraph{Anagrams:} Description..
 
-Our algorithm consists of two phases: in the \textit{scanning phase}, we scan in all the dictionary and scrambled words, and sort each word in alphabetical order; in the \textit{comparing phase} we check if the sorted words in the words list match those in the dictionary list, and output the corresponding words in the dictionary before the sorting.
-
-The scanning phase maintains two lists of the words, the dictionary and the scrambled words. It then sorts the two lists into sorted versions.
-
-The comparing phase simply compares each of the sorted scrambled words with each of the sorted dictonary words.
-
-\begin{algorithm}[H]
-  \caption{Scanning Words}
-  \begin{algorithmic}
-    \Procedure{Scan}{$M,N$}
-      \State $L_1,L_2,L_3 \gets$ \Call{MakeList}{}
-      \While{$m$ of next line is not \texttt{XXXXXX}}
-          \State $L_1$.\Call{add}{$m$}
-      \EndWhile
-      \While{$n$ of next line is not \texttt{XXXXXX}}
-          \State $L_2$.\Call{add}{$n$}
-      \EndWhile
-      \State $L_3 \gets$ \Call{Arrays.Sort}{$L_1$}
-      \State $L_2 \gets$ \Call{Arrays.Sort}{$L_2$}
-    \EndProcedure
-  \end{algorithmic}
-\end{algorithm}
-
-We now compare the sorted versions of the words.
-
-\begin{algorithm}[H]
-  \caption{Verifying Words}
-  \begin{algorithmic}
-    \Procedure{Verify}{$L_2,L_3$}
-      \For{$n \in L_2$}
-        \For{$i$ from 0 to $m$}
-          \If{$n=L_3$.\Call{Get}{$i$}}
-            \State \Return $L_1$.\Call{Get}{$i$}
-          \Else
-            \State \Return \texttt{NOT A VALID WORD}
-          \EndIf
-        \EndFor
-        \State \Return \texttt{******}
-      \EndFor
-      \State \Return null
-    \EndProcedure
-  \end{algorithmic}
-\end{algorithm}
-
-\section{Correctness}
-
-\begin{proposition}
-The algorithm either outputs the matched dictionary words (if there exist) or reports that there is none.
-\end{proposition}
-
-\begin{proof}
-During the scanning phase, we maintained that the program holds three lists, the alphabetical sorted version of the dictionary, the scrambled words, and the original dictionary. Upon comparison of the two sorted lists, we know that any match will indicate an anagram, thus pointing out a positive hit in the dictionary, of the same index.
-\end{proof}
-
-\section{Analysis}
-
-\begin{proposition}
-\label{numq}
-The scan-and-verify algorithm makes $m\times n$ calls to String comparison.
-\end{proposition}
-
-\begin{proof}
-There are $n$ elements in the scrambled words list, each of them requiring $m$ comparison to each of the words in the dictionary.
-\end{proof}
+\subsection{Analysis}
+\paragraph{Anagrams:} Analysis..
 
 
-\section{A Verdict from UVa}
+\subsection{How to use test files}
+To test our code run Anagrams with the input file and compare it with our reference output:
 
-Here we attach a screenshot of an accepted submission to the UVa OJ.\@
+\texttt{java Anagrams in.txt >> out.txt}
 
-\begin{figure}[H]
-  \includegraphics[width=\textwidth]{OJ}
-\end{figure}
+\texttt{diff \ out.txt\ cmp.txt}
+
+
+\subsection{Description of test cases}
+
+
+
+
+
+
+
 
 %%%%%%% end Solution %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
