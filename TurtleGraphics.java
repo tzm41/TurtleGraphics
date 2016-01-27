@@ -102,7 +102,10 @@ public class TurtleGraphics extends GraphicsProgram {
 	 * interface, where they appear as pattern->replacement.
 	 */
 	public void replaceAction() {
-		// Fill this in
+		String text = ui.getProgramText();
+		String replace = ui.getReplacementField();
+        String[] strings = replace.split("\\s+?->\\s+?");
+        ui.setProgramText(text.replaceAll(strings[0], strings[1]));
 	}
 
 	/* Private instance variables */
