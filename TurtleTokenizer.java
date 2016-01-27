@@ -84,7 +84,8 @@ public class TurtleTokenizer {
                 String newString = charAtI + str.substring(0, endIndex);
                 str = str.substring(endIndex);
                 return newString;
+            default:
+                return nextToken();
         }
-        return "";
     }
 }
