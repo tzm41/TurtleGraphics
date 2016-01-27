@@ -53,7 +53,7 @@ public class TurtleTokenizer {
         }
 
         str = str.substring(1);
-        String[] numbers = str.split("[A-Z]|\\{|\\}");
+        String[] numbers = str.split("[A-Z]|\\{|\\}|\\s+");
 
         switch (charAtI) {
             case ' ':
