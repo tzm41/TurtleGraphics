@@ -47,7 +47,7 @@ public class TurtleTokenizer {
     public String nextToken() {
         char charAtI;
         try {
-            charAtI = str.charAt(0);
+            charAtI = str.toLowerCase().charAt(0);
         } catch (StringIndexOutOfBoundsException e) {
             return "";
         }
@@ -58,12 +58,12 @@ public class TurtleTokenizer {
         switch (charAtI) {
             case ' ':
                 return nextToken();
-            case 'F':
-            case 'L':
-            case 'R':
-            case 'U':
-            case 'D':
-            case 'X':
+            case 'f':
+            case 'l':
+            case 'r':
+            case 'u':
+            case 'd':
+            case 'x':   	
                 if (str.length() > 0 && Character.isDigit(str.charAt(0))) {
                     str = str.substring(numbers[0].length());
                     return charAtI + numbers[0];
@@ -84,8 +84,7 @@ public class TurtleTokenizer {
                 String newString = charAtI + str.substring(0, endIndex);
                 str = str.substring(endIndex);
                 return newString;
-            default:
-                return nextToken();
         }
+        return "";
     }
 }
