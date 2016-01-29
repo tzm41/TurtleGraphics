@@ -129,19 +129,38 @@ Problem \hmwkAssignmentNum.\hmwkProblemNum}
 \section{Turtle Graphics}
 
 \subsection{How to compile and run}
-
+Easiest way is to import files to eclipse and run from there.
 
 \subsection{Description of algorithms and data structure}
-\paragraph{TurtleTokenizer:} description..
-\paragraph{TurtleGraphics:} description..
+\paragraph{TurtleTokenizer:} The program stores the whole string command in an instance variable. The method \texttt{nextToken} starts going through every character of the string until it identifies a command. In the case of finding braces, we keep an int variable to keep track of how many open braces there are to make sure there are just as many closing braces. Once the command is determined, it is returned as the next token.
+
+\paragraph{TurtleGraphics:} The \texttt{execute} method creates a TurtleTokenizer object and reads each token one by one. For each token, it stores the first character, the command, into a char object and uses it to decide what the turtle should do. It also stores the numbers following the command character and uses it to move the turtle by that many pixels. In the case of the command 'X', we recursively compute the given block of commands the specified number of times. The \texttt{replaceAction} method takes advantage of regular expressions and the provided ui methods to replace the specified strings.
+
+
 
 \subsection{Analysis}
-\paragraph{TurtleTokenizer:} Analysis..
-\paragraph{TurtleGraphics:} Analysis..
 
 \subsection{How to use test files}
 
 \subsection{Description of test cases}
+figure \ref{fig:flower} shows the output of our program for the command X36 
+\texttt{\{X4 \{F100 L90\} L10\}}. figure \ref{fig:snowflake} shows the ouput for the 
+Snowflake3 file.
+
+\begin{figure}[!htp]
+\includegraphics[width=0.3\textwidth]{flowerExample.png}
+\caption{Flower.}
+\label{fig:flower}
+\end{figure}
+
+
+\begin{figure}[!htp]
+\includegraphics[width=0.3\textwidth]{snowFlake3.png}
+\caption{Snowflake.}
+\label{fig:snowflake}
+\end{figure}
+
+
 
 \newpage
 \section{Anagrams}
