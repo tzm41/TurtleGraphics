@@ -88,7 +88,7 @@ Problem \hmwkAssignmentNum.\hmwkProblemNum}
 
 \fancypagestyle{fancycollab}
 {
-    %\lfoot{\textit{Collaborators: \hmwkCollaborators}}
+    \lfoot{\textit{Collaborators: \hmwkCollaborators}}
 }
 
 \fancypagestyle{problemstatement}
@@ -147,17 +147,17 @@ Problem \hmwkAssignmentNum.\hmwkProblemNum}
 \section{Anagrams}
 
 \subsection{How to compile and run}
-Compilation: 
+Compilation:
 \texttt{javac Anagrams.java}
 
-execution:
+Execution:
 \texttt{java\ Anagrams\ input.txt}
 
 \subsection{Description of algorithms and data structure}
-\paragraph{Anagrams:} Description..
+Our program uses a \texttt{HashSet} and an \texttt{ArrayList}. In the \texttt{makeAnagram} method, we determine all possible character choices of the first character in the string, and recursively switch characters in substrings to create anagrams of a string.
 
 \subsection{Analysis}
-\paragraph{Anagrams:} Analysis..
+For the recursive \texttt{makeAnagram} method, the complexity is $O(n!)$, since each layer we push onto the stack, we have one less character to make anagrams, and each step takes exactly the length of the string steps to compute anagrams.
 
 
 \subsection{How to use test files}
@@ -165,17 +165,11 @@ To test our code run Anagrams with the input file and compare it with our refere
 
 \texttt{java Anagrams in.txt >> out.txt}
 
-\texttt{diff \ out.txt\ cmp.txt}
+\texttt{diff\ out.txt\ cmp.txt}
 
 
 \subsection{Description of test cases}
-
-
-
-
-
-
-
+Since number of anagram is growing with $n! $, we only created two test cases, \texttt{abc}, and \texttt{post}. The output was exactly as expected.
 
 %%%%%%% end Solution %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
